@@ -1,0 +1,78 @@
+name: Publish NPM package
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+      
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      
+      - name: Determine package to publish
+        id: package-info
+        run: |
+          # Extract package name from tag (assuming format: package-name-vX.Y.Z)
+          TAG_NAME="${{ github.event.release.tag_name }}"
+          
+          # Match package-name-vX.Y.Z format
+          if [[ $TAG_NAME =~ ^([^-]+(-[^-]+)*)-v([0-9]+\.[0-9]+\.[0-9]+.*)$ ]]; then
+            PACKAGE_NAME="${BASH_REMATCH[1]}"
+            VERSION="${BASH_REMATCH[3]}"
+          else
+            echo "Error: Tag format not recognized. Expected format: package-name-vX.Y.Z"
+            exit 1
+          fi
+          
+          # Validate that the package directory exists
+          if [ ! -d "$PACKAGE_NAME" ]; then
+            echo "Error: Package directory '$PACKAGE_NAME' not found"
+            exit 1
+          fi
+          
+          echo "package=$PACKAGE_NAME" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Detected package: $PACKAGE_NAME, version: $VERSION"
+      
+      - name: Validate package version
+        run: |
+          cd ${{ steps.package-info.outputs.package }}
+          PKG_VERSION=$(jq -r '.version' package.json)
+          TAG_VERSION="${{ steps.package-info.outputs.version }}"
+          
+          if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
+            echo "Error: Version mismatch between tag ($TAG_VERSION) and package.json ($PKG_VERSION)"
+            echo "Please ensure the version in package.json matches the tag version before creating a release."
+            exit 1
+          fi
+          
+          echo "Version validation passed: $PKG_VERSION"
+      
+      - name: Install dependencies
+        run: |
+          cd ${{ steps.package-info.outputs.package }}
+          bun install
+      
+      - name: Build package
+        run: |
+          cd ${{ steps.package-info.outputs.package }}
+          bun run build
+      
+      - name: Publish to npm
+        run: |
+          cd ${{ steps.package-info.outputs.package }}
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
