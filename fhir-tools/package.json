@@ -1,0 +1,32 @@
+{
+  "name": "mcp-fhir-tools",
+  "version": "0.1.0",
+  "description": "Tools for adding FHIR capabilities to LLMs.",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start-stdio": "bun src/stdio.ts",
+    "start-sse": "bun src/sse.ts",
+    "dev": "tsc -w",
+    "inspect-stdio": "npx @modelcontextprotocol/inspector bun src/stdio.ts",
+    "inspect-sse": "npx @modelcontextprotocol/inspector bun src/sse.ts"
+  },
+  "keywords": [],
+  "author": "John Grimes",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@types/fhir": "^0.0.41",
+    "express": "^4.21.2",
+    "node-fetch": "^3.3.2",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.2",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
+    "eslint": "^8.50.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.2.2"
+  }
+}
