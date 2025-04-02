@@ -9,7 +9,8 @@
     "start-sse": "bun src/sse.ts",
     "dev": "tsc -w",
     "inspect-stdio": "npx @modelcontextprotocol/inspector bun src/stdio.ts",
-    "inspect-sse": "npx @modelcontextprotocol/inspector bun src/sse.ts"
+    "inspect-sse": "npx @modelcontextprotocol/inspector bun src/sse.ts",
+    "test": "jest"
   },
   "keywords": [],
   "author": "John Grimes",
