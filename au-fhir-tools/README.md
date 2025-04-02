@@ -93,3 +93,7 @@ Parameters: None
 Generates a fictional but valid DVA (Department of Veterans' Affairs) number.
 
 Parameters: None
+
+Copyright © 2025, Commonwealth Scientific and Industrial Research Organisation
+(CSIRO) ABN 41 687 119 230. Licensed under the
+[Apache License, version 2.0](https://www.apache.org/licenses/LICENSE-2.0).

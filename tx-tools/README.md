@@ -70,3 +70,7 @@ Common ValueSet URLs:
 - `http://snomed.info/sct?fhir_vs`: All of SNOMED CT
 - `http://loinc.org/vs`: All of LOINC
 - `http://snomed.info/sct?fhir_vs=isa/71388002`: SNOMED CT procedures
+
+Copyright © 2025, Commonwealth Scientific and Industrial Research Organisation
+(CSIRO) ABN 41 687 119 230. Licensed under the
+[Apache License, version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
