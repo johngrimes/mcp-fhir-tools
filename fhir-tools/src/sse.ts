@@ -23,7 +23,7 @@ const app = express();
 
 let transport: SSEServerTransport;
 
-app.get("/sse", async (req, res) => {
+app.get("/sse", async (_req, res) => {
   logger.info("Received SSE connection request");
   transport = new SSEServerTransport("/messages", res);
   await server.connect(transport);
@@ -35,4 +35,6 @@ app.post("/messages", async (req, res) => {
   await transport.handlePostMessage(req, res);
 });
 
-app.listen(3003, () => logger.info("Generic FHIR Tools server listening on port 3003"));
+app.listen(3003, () =>
+  logger.info("Generic FHIR Tools server listening on port 3003"),
+);

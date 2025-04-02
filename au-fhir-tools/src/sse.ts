@@ -23,7 +23,7 @@ const app = express();
 
 let transport: SSEServerTransport;
 
-app.get("/sse", async (req, res) => {
+app.get("/sse", async (_req, res) => {
   logger.info("Received SSE connection request");
   transport = new SSEServerTransport("/messages", res);
   await server.connect(transport);

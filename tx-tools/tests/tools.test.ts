@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import server from "../src/server";
 import fetch from "node-fetch";
+import server from "../src/server";
 
 jest.mock("node-fetch", () => jest.fn());
 
@@ -29,7 +29,7 @@ describe("Terminology Tools", () => {
       ok: true,
       json: async () => ({ expansion: { contains: [] } }),
     });
-    const tool = (server as Record<string, unknown>)._registeredTools["lookup-code"];
+    const tool = server["_registeredTools"]["lookup-code"];
     const response = await tool.callback({
       filter: "hypertension",
       url: "http://snomed.info/sct?fhir_vs",
@@ -43,7 +43,7 @@ describe("Terminology Tools", () => {
       ok: true,
       json: async () => ({ expansion: { contains: [firstMatch] } }),
     });
-    const tool = (server as Record<string, unknown>)._registeredTools["lookup-code"];
+    const tool = server["_registeredTools"]["lookup-code"];
     const response = await tool.callback({
       filter: "hypertension",
       url: "http://snomed.info/sct?fhir_vs",
@@ -59,7 +59,7 @@ describe("Terminology Tools", () => {
       status: 500,
       text: async () => "Server Error",
     });
-    const tool = (server as Record<string, unknown>)._registeredTools["lookup-code"];
+    const tool = server["_registeredTools"]["lookup-code"];
     const response = await tool.callback({
       filter: "hypertension",
       url: "http://snomed.info/sct?fhir_vs",
