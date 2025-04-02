@@ -2,9 +2,11 @@ name: "Test tx-tools"
 on:
   push:
     paths:
+      - ".github/workflows/test-tx-tools.yml"
       - "tx-tools/**"
   pull_request:
     paths:
+      - ".github/workflows/test-tx-tools.yml"
       - "tx-tools/**"
 
 jobs:

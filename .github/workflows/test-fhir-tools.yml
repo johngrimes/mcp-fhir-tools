@@ -2,9 +2,11 @@ name: "Test fhir-tools"
 on:
   push:
     paths:
+      - ".github/workflows/test-fhir-tools.yml"
       - "fhir-tools/**"
   pull_request:
     paths:
+      - ".github/workflows/test-fhir-tools.yml"
       - "fhir-tools/**"
 
 jobs:
