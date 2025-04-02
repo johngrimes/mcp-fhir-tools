@@ -1,0 +1,26 @@
+name: "Test au-fhir-tools"
+on:
+  push:
+    paths:
+      - "au-fhir-tools/**"
+  pull_request:
+    paths:
+      - "au-fhir-tools/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install au-fhir-tools dependencies
+        working-directory: au-fhir-tools
+        run: bun install
+
+      - name: Run au-fhir-tools tests
+        working-directory: au-fhir-tools
+        run: bun run test
