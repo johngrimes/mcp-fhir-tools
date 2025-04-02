@@ -18,7 +18,7 @@ import server from "../src/server";
 
 describe("FHIR Tools", () => {
   test("generate-uuid returns a valid UUID v4", async () => {
-    const tool = (server as any)._registeredTools["generate-uuid"];
+    const tool = (server as Record<string, unknown>)._registeredTools["generate-uuid"];
     const result = await tool.callback({});
     expect(result.content[0].text).toMatch(
       /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i,
@@ -32,9 +32,11 @@ describe("FHIR Tools", () => {
 
     test("returns warnings and errors when validator outputs lines", async () => {
       // Stub exec so that it returns simulated warnings/errors.
+      // Import child_process module
+      const childProcess = await import("child_process");
       jest
-        .spyOn(require("child_process"), "exec")
-        .mockImplementation((...args: any[]) => {
+        .spyOn(childProcess, "exec")
+        .mockImplementation((...args: unknown[]) => {
           const callback = args[args.length - 1] as (
             error: Error | null,
             stdout: string,
@@ -43,9 +45,9 @@ describe("FHIR Tools", () => {
           process.nextTick(() =>
             callback(null, "Warning: Something is off\nError: Fake error", ""),
           );
-          return {} as any;
+          return {} as Record<string, unknown>;
         });
-      const tool = (server as any)._registeredTools["validate"];
+      const tool = (server as Record<string, unknown>)._registeredTools["validate"];
       const response = await tool.callback({
         resource: "{}",
         fhirVersion: "4.0.1",
@@ -56,18 +58,20 @@ describe("FHIR Tools", () => {
     });
 
     test("returns an error when exec fails", async () => {
+      // Import child_process module
+      const childProcess = await import("child_process");
       jest
-        .spyOn(require("child_process"), "exec")
-        .mockImplementation((...args: any[]) => {
+        .spyOn(childProcess, "exec")
+        .mockImplementation((...args: unknown[]) => {
           const callback = args[args.length - 1] as (
             error: Error | null,
             stdout: string,
             stderr: string,
           ) => void;
           process.nextTick(() => callback(new Error("Exec failed"), "", ""));
-          return {} as any;
+          return {} as Record<string, unknown>;
         });
-      const tool = (server as any)._registeredTools["validate"];
+      const tool = (server as Record<string, unknown>)._registeredTools["validate"];
       const response = await tool.callback({
         resource: "{}",
         fhirVersion: "4.0.1",

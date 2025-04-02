@@ -29,7 +29,7 @@ describe("Terminology Tools", () => {
       ok: true,
       json: async () => ({ expansion: { contains: [] } }),
     });
-    const tool = (server as any)._registeredTools["lookup-code"];
+    const tool = (server as Record<string, unknown>)._registeredTools["lookup-code"];
     const response = await tool.callback({
       filter: "hypertension",
       url: "http://snomed.info/sct?fhir_vs",
@@ -43,7 +43,7 @@ describe("Terminology Tools", () => {
       ok: true,
       json: async () => ({ expansion: { contains: [firstMatch] } }),
     });
-    const tool = (server as any)._registeredTools["lookup-code"];
+    const tool = (server as Record<string, unknown>)._registeredTools["lookup-code"];
     const response = await tool.callback({
       filter: "hypertension",
       url: "http://snomed.info/sct?fhir_vs",
@@ -59,7 +59,7 @@ describe("Terminology Tools", () => {
       status: 500,
       text: async () => "Server Error",
     });
-    const tool = (server as any)._registeredTools["lookup-code"];
+    const tool = (server as Record<string, unknown>)._registeredTools["lookup-code"];
     const response = await tool.callback({
       filter: "hypertension",
       url: "http://snomed.info/sct?fhir_vs",

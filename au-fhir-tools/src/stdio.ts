@@ -38,8 +38,8 @@ function getErrorDetails(error: unknown) {
     errorObject:
       error instanceof Error
         ? Object.getOwnPropertyNames(error).reduce(
-            (obj: any, prop) => {
-              obj[prop] = (error as any)[prop];
+            (obj: Record<string, unknown>, prop) => {
+              obj[prop] = (error as Record<string, unknown>)[prop];
               return obj;
             },
             {} as Record<string, unknown>,

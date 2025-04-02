@@ -15,7 +15,6 @@
  */
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { z } from "zod";
 
 const server = new McpServer({
   name: "Australia FHIR Tools",
