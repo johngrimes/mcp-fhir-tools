@@ -17,10 +17,14 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
 
-      - name: Install tx-tools dependencies
+      - name: Install dependencies
         working-directory: tx-tools
         run: bun install
 
-      - name: Run tx-tools tests
+      - name: Run linter
+        working-directory: tx-tools
+        run: bun run lint
+
+      - name: Run tests
         working-directory: tx-tools
         run: bun run test

@@ -17,10 +17,14 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
 
-      - name: Install fhir-tools dependencies
+      - name: Install dependencies
         working-directory: fhir-tools
         run: bun install
 
-      - name: Run fhir-tools tests
+      - name: Run linter
+        working-directory: fhir-tools
+        run: bun run lint
+
+      - name: Run tests
         working-directory: fhir-tools
         run: bun run test
