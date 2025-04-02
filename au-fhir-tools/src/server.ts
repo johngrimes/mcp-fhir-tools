@@ -17,7 +17,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 
 const server = new McpServer({
-  name: "Australia FHIR Tools",
+  name: "AU FHIR Tools",
   version: "0.1.0",
 });
 
@@ -106,21 +106,21 @@ server.tool(
       const useEightDigits = Math.random() > 0.5;
       const middleDigitsLength = useEightDigits ? 8 : 7;
       const middleDigits = generateRandomDigits(middleDigitsLength);
-      
+
       // Combine first digit and middle digits
       const baseNumber = firstDigit.toString() + middleDigits;
-      
+
       // Calculate check digit using the Medicare algorithm
       // Medicare uses a weighted sum where each digit is multiplied by its position weight
       const weights = [1, 3, 7, 9, 1, 3, 7, 9];
       let sum = 0;
-      
+
       for (let i = 0; i < baseNumber.length; i++) {
         sum += parseInt(baseNumber[i]) * weights[i];
       }
-      
+
       const checkDigit = sum % 10;
-      
+
       return baseNumber + checkDigit.toString();
     }
 
@@ -146,11 +146,11 @@ server.tool(
       // Q: Gold Card for war widow/widower
       const prefixes = ["N", "H", "W", "Q"];
       const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-      
+
       // DVA numbers typically have 7-9 digits after the prefix
       const digitLength = Math.floor(Math.random() * 3) + 7; // 7, 8, or 9 digits
       const digits = generateRandomDigits(digitLength);
-      
+
       // Format the DVA number with the prefix and digits
       return prefix + digits;
     }

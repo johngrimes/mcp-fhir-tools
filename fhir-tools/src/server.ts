@@ -22,7 +22,7 @@ import path from "path";
 import { z } from "zod";
 
 const server = new McpServer({
-  name: "Generic FHIR Tools",
+  name: "FHIR Tools",
   version: "0.1.0",
 });
 
