@@ -16,9 +16,25 @@
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 
+/**
+ * Australian FHIR Tools Server
+ *
+ * This server provides tools specific to Australian healthcare requirements:
+ * - HPI-I (Healthcare Provider Identifier - Individual) generator
+ * - HPI-O (Healthcare Provider Identifier - Organisation) generator
+ * - IHI (Individual Healthcare Identifier) generator
+ * - Medicare number generator
+ * - DVA (Department of Veterans' Affairs) number generator
+ *
+ * These tools generate fictional but valid identifiers that follow the correct
+ * formatting rules and checksum algorithms for Australian healthcare identifiers.
+ * They are intended for testing and development purposes only.
+ */
 const server = new McpServer({
   name: "AU FHIR Tools",
   version: "0.1.0",
+  description:
+    "Tools for generating Australian healthcare identifiers and codes",
 });
 
 function luhnChecksum(number: string): number {

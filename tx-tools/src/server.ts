@@ -19,9 +19,17 @@ import { ValueSet } from "fhir/r4.js";
 import fetch from "node-fetch";
 import { z } from "zod";
 
+/**
+ * Terminology Services Tools Server
+ *
+ * This server provides tools for interacting with FHIR terminology services, including code lookup
+ * based on text descriptions.
+ */
 const server = new McpServer({
   name: "Terminology Tools",
   version: "0.1.0",
+  description:
+    "Tools for querying terminology using a FHIR terminology service.",
 });
 
 // Register code lookup tool

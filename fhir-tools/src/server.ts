@@ -21,9 +21,20 @@ import fs from "fs";
 import path from "path";
 import { z } from "zod";
 
+/**
+ * FHIR Tools Server
+ *
+ * This server provides tools for working with FHIR resources:
+ * - Resource validation against official FHIR schemas and implementation guides
+ * - Generation of identifiers (UUIDs) for FHIR resources
+ *
+ * The tools are designed to help with common FHIR development tasks and
+ * can be integrated into healthcare software development workflows.
+ */
 const server = new McpServer({
   name: "FHIR Tools",
   version: "0.1.0",
+  description: "Tools for validating FHIR resources and generating identifiers",
 });
 
 // Register FHIR validation tool
