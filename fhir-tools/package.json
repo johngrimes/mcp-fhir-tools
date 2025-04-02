@@ -9,7 +9,9 @@
     "start-sse": "bun src/sse.ts",
     "inspect-stdio": "npx @modelcontextprotocol/inspector bun src/stdio.ts",
     "inspect-sse": "npx @modelcontextprotocol/inspector bun src/sse.ts",
-    "test": "bunx jest"
+    "test": "bunx jest",
+    "lint": "bunx eslint . --ext .ts",
+    "lint:fix": "bunx eslint . --ext .ts --fix"
   },
   "keywords": [],
   "author": "John Grimes",
