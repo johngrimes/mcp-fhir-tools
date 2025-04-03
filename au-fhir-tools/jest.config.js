@@ -1,6 +1,6 @@
 export default {
   transform: {
-    '^.+\\.tsx?$': 'ts-jest'
+    "^.+\\.tsx?$": "ts-jest",
   },
-  testEnvironment: 'node',
+  testEnvironment: "node",
 };

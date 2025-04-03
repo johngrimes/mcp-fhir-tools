@@ -23,14 +23,14 @@ const app = express();
 
 let transport: SSEServerTransport;
 
-app.get("/sse", async (_req, res) => {
+app.get("/sse", async (_req: express.Request, res: express.Response) => {
   logger.info("Received SSE connection request");
   transport = new SSEServerTransport("/messages", res);
   await server.connect(transport);
   logger.info("SSE transport connected");
 });
 
-app.post("/messages", async (req, res) => {
+app.post("/messages", async (req: express.Request, res: express.Response) => {
   logger.debug("Received message", req);
   await transport.handlePostMessage(req, res);
 });

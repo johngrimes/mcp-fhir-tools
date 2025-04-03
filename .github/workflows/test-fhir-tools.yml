@@ -32,6 +32,10 @@ jobs:
         working-directory: fhir-tools
         run: bun run lint
 
+      - name: Check formatting
+        working-directory: fhir-tools
+        run: bun run format:check
+
       - name: Run tests
         working-directory: fhir-tools
         run: bun run test

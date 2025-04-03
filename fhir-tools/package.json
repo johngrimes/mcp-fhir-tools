@@ -10,8 +10,13 @@
     "inspect-stdio": "npx @modelcontextprotocol/inspector bun src/stdio.ts",
     "inspect-sse": "npx @modelcontextprotocol/inspector bun src/sse.ts",
     "test": "bunx jest",
-    "lint": "bunx eslint . --ext .ts",
-    "lint:fix": "bunx eslint . --ext .ts --fix"
+    "lint": "bunx eslint . --ext .ts,.js",
+    "lint:fix": "bunx eslint . --ext .ts,.js --fix",
+    "format": "bunx prettier --write \"**/*.{ts,js,json}\"",
+    "format:check": "bunx prettier -l \"**/*.{ts,js,json}\"",
+    "download-validator": "node bin/download-validator.js",
+    "postinstall": "node bin/download-validator.js",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [],
   "author": "John Grimes",
@@ -24,6 +29,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/express": "^5.0.1",
     "@types/jest": "^29.5.14",
     "@types/node": "^20.8.2",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
@@ -33,5 +39,9 @@
     "prettier": "^3.4.2",
     "ts-jest": "^29.3.1",
     "typescript": "^5.2.2"
-  }
+  },
+  "files": [
+    "dist",
+    "bin/download-validator.js"
+  ]
 }

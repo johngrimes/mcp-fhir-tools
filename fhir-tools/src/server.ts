@@ -90,7 +90,7 @@ server.tool(
       const command = [
         "java",
         "-jar",
-        path.join(__dirname, "../bin/validator_cli.jar"),
+        path.join(__dirname, "bin/validator_cli.jar"),
         "-tx",
         "https://tx.ontoserver.csiro.au/fhir",
         "-sct",

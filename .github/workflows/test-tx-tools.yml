@@ -32,6 +32,10 @@ jobs:
         working-directory: tx-tools
         run: bun run lint
 
+      - name: Check formatting
+        working-directory: tx-tools
+        run: bun run format:check
+
       - name: Run tests
         working-directory: tx-tools
         run: bun run test

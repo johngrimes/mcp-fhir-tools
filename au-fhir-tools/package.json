@@ -10,8 +10,10 @@
     "inspect-stdio": "npx @modelcontextprotocol/inspector bun src/stdio.ts",
     "inspect-sse": "npx @modelcontextprotocol/inspector bun src/sse.ts",
     "test": "bunx jest",
-    "lint": "bunx eslint . --ext .ts",
-    "lint:fix": "bunx eslint . --ext .ts --fix"
+    "lint": "bunx eslint . --ext .ts,.js",
+    "lint:fix": "bunx eslint . --ext .ts,.js --fix",
+    "format": "bunx prettier --write \"**/*.{ts,js,json}\"",
+    "format:check": "bunx prettier -l \"**/*.{ts,js,json}\""
   },
   "keywords": [],
   "author": "John Grimes",

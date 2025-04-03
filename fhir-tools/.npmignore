@@ -1,0 +1,25 @@
+# Source files
+src/
+tests/
+*.ts
+!*.d.ts
+
+# Configuration files
+tsconfig.json
+jest.config.js
+.eslintrc.js
+.prettierrc
+
+# Make sure validator_cli.jar is not included in the package
+bin/validator_cli.jar
+bin/download-validator.ts
+
+# Build artifacts
+coverage/
+.nyc_output/
+
+# Development files
+.idea/
+.vscode/
+*.log
+.DS_Store
