@@ -128,11 +128,11 @@ server.tool(
 
       // Calculate check digit using the Medicare algorithm
       // Medicare uses a weighted sum where each digit is multiplied by its position weight
-      const weights = [1, 3, 7, 9, 1, 3, 7, 9];
+      const weights = [1, 3, 7, 9, 1, 3, 7, 9, 1]; // Added extra weight for 9-digit numbers
       let sum = 0;
 
       for (let i = 0; i < baseNumber.length; i++) {
-        sum += parseInt(baseNumber[i]) * weights[i];
+        sum += parseInt(baseNumber[i]) * weights[i % weights.length]; // Use modulo to handle any length
       }
 
       const checkDigit = sum % 10;
