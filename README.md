@@ -1,4 +1,4 @@
-# FHIR Tools
+# MCP FHIR Tools
 
 A collection of tools for working with FHIR (Fast Healthcare Interoperability Resources) data, designed to be used with Large Language Models via the Model Context Protocol.
 
