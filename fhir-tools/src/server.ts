@@ -19,6 +19,7 @@ import { exec } from "child_process";
 import crypto from "crypto";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import { z } from "zod";
 
 /**
@@ -84,13 +85,22 @@ server.tool(
       const tempFile = `/tmp/resource-${crypto.randomUUID()}.json`;
       await fs.promises.writeFile(tempFile, resource);
 
-      const __dirname = path.resolve(path.dirname(""));
+      // Determine the path to the validator JAR
+      // The JAR is expected to be in fhir-tools/bin/validator_cli.jar
+      // This script (server.ts) is in fhir-tools/src/server.ts
+      // After compilation, it might be in fhir-tools/dist/server.js (or similar)
+      // or run directly by bun from fhir-tools/src/server.ts
+      const scriptFileUrl = import.meta.url;
+      const scriptFilePath = fileURLToPath(scriptFileUrl);
+      const scriptFileDir = path.dirname(scriptFilePath);
+      // The JAR is in '../bin/' relative to 'fhir-tools/src/' or 'fhir-tools/dist/'
+      const validatorJarPath = path.join(scriptFileDir, "../bin/validator_cli.jar");
 
       // Construct the validation command
       const command = [
         "java",
         "-jar",
-        path.join(__dirname, "bin/validator_cli.jar"),
+        validatorJarPath,
         "-tx",
         "https://tx.ontoserver.csiro.au/fhir",
         "-sct",
