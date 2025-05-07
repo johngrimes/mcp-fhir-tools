@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Tools for adding FHIR capabilities to LLMs.",
   "type": "module",
+  "bin": {
+    "mcp-fhir-tools": "dist/stdio.js"
+  },
   "scripts": {
     "build": "bunx tsc",
     "start-stdio": "bun src/stdio.ts",
