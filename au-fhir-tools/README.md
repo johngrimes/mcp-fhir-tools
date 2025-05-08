@@ -1,6 +1,7 @@
 # Australian FHIR Tools
 
-Tools for generating valid (but fictional) Australian healthcare identifiers for use in FHIR resources.
+Tools for generating valid (but fictional) Australian healthcare identifiers for
+use in FHIR resources.
 
 ## Features
 
@@ -12,7 +13,8 @@ Tools for generating valid (but fictional) Australian healthcare identifiers for
 - **Medicare**: Medicare numbers
 - **DVA**: Department of Veterans' Affairs numbers
 
-All generated identifiers follow the correct format and pass checksum validation where applicable.
+All generated identifiers follow the correct format and pass checksum validation
+where applicable.
 
 ## Installation
 
@@ -31,18 +33,17 @@ To add this tool to your Claude Desktop configuration:
   "mcpServers": {
     "au-fhir-tools": {
       "command": "npx",
-      "args": [
-        "-y",
-        "mcp-au-fhir-tools"
-      ]
+      "args": ["-y", "mcp-au-fhir-tools"]
     }
   }
 }
 ```
 
-4. If you already have other MCP servers configured, just add the "au-fhir-tools" entry to the existing "mcpServers" object
+4. If you already have other MCP servers configured, just add the
+   "au-fhir-tools" entry to the existing "mcpServers" object
 5. Save the file and restart Claude Desktop
-6. You should now see the Australian FHIR Tools available in the tools menu (hammer icon)
+6. You should now see the Australian FHIR Tools available in the tools menu
+   (hammer icon)
 
 ## Usage
 
@@ -60,19 +61,22 @@ bun run start-stdio
 bun run start-sse
 ```
 
-This starts a server on port 3002 that can be accessed via Server-Sent Events (SSE).
+This starts a server on port 3002 that can be accessed via Server-Sent Events
+(SSE).
 
 ### Tool Documentation
 
 #### generate-hpi-i
 
-Generates a fictional but valid HPI-I (Healthcare Provider Identifier - Individual).
+Generates a fictional but valid HPI-I (Healthcare Provider Identifier -
+Individual).
 
 Parameters: None
 
 #### generate-hpi-o
 
-Generates a fictional but valid HPI-O (Healthcare Provider Identifier - Organisation).
+Generates a fictional but valid HPI-O (Healthcare Provider Identifier -
+Organisation).
 
 Parameters: None
 

@@ -94,7 +94,10 @@ server.tool(
       const scriptFilePath = fileURLToPath(scriptFileUrl);
       const scriptFileDir = path.dirname(scriptFilePath);
       // The JAR is in '../bin/' relative to 'fhir-tools/src/' or 'fhir-tools/dist/'
-      const validatorJarPath = path.join(scriptFileDir, "../bin/validator_cli.jar");
+      const validatorJarPath = path.join(
+        scriptFileDir,
+        "../bin/validator_cli.jar",
+      );
 
       // Construct the validation command
       const command = [

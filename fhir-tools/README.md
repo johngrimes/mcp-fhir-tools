@@ -1,16 +1,19 @@
 # FHIR Tools
 
-Tools for working with FHIR resources, including validation and identifier generation.
+Tools for working with FHIR resources, including validation and identifier
+generation.
 
 ## Features
 
 ### FHIR Resource Validation
 
-Validates FHIR resources against the official FHIR validator, supporting multiple FHIR versions and SNOMED CT editions.
+Validates FHIR resources against the official FHIR validator, supporting
+multiple FHIR versions and SNOMED CT editions.
 
 ### UUID Generation
 
-Generates random UUID v4 strings for use as unique identifiers in FHIR resources.
+Generates random UUID v4 strings for use as unique identifiers in FHIR
+resources.
 
 ## Installation
 
@@ -29,16 +32,14 @@ To add this tool to your Claude Desktop configuration:
   "mcpServers": {
     "fhir-tools": {
       "command": "npx",
-      "args": [
-        "-y",
-        "mcp-fhir-tools"
-      ]
+      "args": ["-y", "mcp-fhir-tools"]
     }
   }
 }
 ```
 
-4. If you already have other MCP servers configured, just add the "fhir-tools" entry to the existing "mcpServers" object
+4. If you already have other MCP servers configured, just add the "fhir-tools"
+   entry to the existing "mcpServers" object
 5. Save the file and restart Claude Desktop
 6. You should now see the FHIR Tools available in the tools menu (hammer icon)
 
@@ -58,7 +59,8 @@ bun run start-stdio
 bun run start-sse
 ```
 
-This starts a server on port 3003 that can be accessed via Server-Sent Events (SSE).
+This starts a server on port 3003 that can be accessed via Server-Sent Events
+(SSE).
 
 ### Tool Documentation
 
@@ -67,9 +69,11 @@ This starts a server on port 3003 that can be accessed via Server-Sent Events (S
 Validates a FHIR resource using the official FHIR validator.
 
 Parameters:
+
 - `resource`: FHIR resource in JSON format
 - `fhirVersion`: The version of FHIR to validate against (4.0.1, 1.0.2, etc.)
-- `snomedVersion`: SNOMED CT version to use for validation (intl, us, uk, au, etc.)
+- `snomedVersion`: SNOMED CT version to use for validation (intl, us, uk, au,
+  etc.)
 
 #### generate-uuid
 

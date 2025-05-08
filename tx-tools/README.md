@@ -1,12 +1,14 @@
 # Terminology Tools
 
-Tools for working with FHIR terminology services, including code lookup and validation.
+Tools for working with FHIR terminology services, including code lookup and
+validation.
 
 ## Features
 
 ### Code Lookup
 
-Looks up clinical codes based on text descriptions using a FHIR terminology server, ensuring that codes are valid and compliant with value set bindings.
+Looks up clinical codes based on text descriptions using a FHIR terminology
+server, ensuring that codes are valid and compliant with value set bindings.
 
 ## Installation
 
@@ -25,18 +27,17 @@ To add this tool to your Claude Desktop configuration:
   "mcpServers": {
     "tx-tools": {
       "command": "npx",
-      "args": [
-        "-y",
-        "mcp-tx-tools"
-      ]
+      "args": ["-y", "mcp-tx-tools"]
     }
   }
 }
 ```
 
-4. If you already have other MCP servers configured, just add the "tx-tools" entry to the existing "mcpServers" object
+4. If you already have other MCP servers configured, just add the "tx-tools"
+   entry to the existing "mcpServers" object
 5. Save the file and restart Claude Desktop
-6. You should now see the Terminology Tools available in the tools menu (hammer icon)
+6. You should now see the Terminology Tools available in the tools menu (hammer
+   icon)
 
 ## Usage
 
@@ -54,19 +55,23 @@ bun run start-stdio
 bun run start-sse
 ```
 
-This starts a server on port 3001 that can be accessed via Server-Sent Events (SSE).
+This starts a server on port 3001 that can be accessed via Server-Sent Events
+(SSE).
 
 ### Tool Documentation
 
 #### lookup-code
 
-Looks up a clinical code based on text description using a FHIR terminology server.
+Looks up a clinical code based on text description using a FHIR terminology
+server.
 
 Parameters:
+
 - `filter`: Text to search for (e.g. "hypertension", "tracheotomy")
 - `url`: ValueSet URL to search within (e.g. "http://snomed.info/sct?fhir_vs")
 
 Common ValueSet URLs:
+
 - `http://snomed.info/sct?fhir_vs`: All of SNOMED CT
 - `http://loinc.org/vs`: All of LOINC
 - `http://snomed.info/sct?fhir_vs=isa/71388002`: SNOMED CT procedures
