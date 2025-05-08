@@ -94,6 +94,9 @@ Parameters:
 - `fhirVersion`: The version of FHIR to validate against (4.0.1, 1.0.2, etc.)
 - `snomedVersion`: SNOMED CT version to use for validation (intl, us, uk, au,
   etc.)
+- `txServer` (optional): URL of the terminology server to use. If not provided,
+  the validator's default (often `tx.fhir.org`) is used. For Australian FHIR
+  content, use `https://tx.dev.hl7.org.au/fhir`.
 
 #### generate-uuid
 

@@ -78,8 +78,17 @@ server.tool(
         - "dk": Denmark
         - "es": Spain`,
       ),
+    txServer: z
+      .string()
+      .url()
+      .optional()
+      .describe(
+        `Optional URL of the terminology server to use for validation. If not provided, 
+        the validator's default (tx.fhir.org) will be used. For Australian FHIR content, use 
+        "https://tx.dev.hl7.org.au/fhir".`,
+      ),
   },
-  async ({ resource, fhirVersion, snomedVersion }) => {
+  async ({ resource, fhirVersion, snomedVersion, txServer }) => {
     try {
       // Create a temporary file to store the resource
       const tempFile = `/tmp/resource-${crypto.randomUUID()}.json`;
@@ -100,17 +109,21 @@ server.tool(
       );
 
       // Construct the validation command arguments for execFile
-      const commandArgs = [
-        "-jar",
-        validatorJarPath,
-        "-tx",
-        "https://tx.ontoserver.csiro.au/fhir",
+      // The source file (tempFile) should come directly after the JAR path.
+      const commandArgs = ["-jar", validatorJarPath, tempFile];
+
+      // Conditionally add the terminology server argument
+      if (txServer) {
+        commandArgs.push("-tx", txServer);
+      }
+
+      // Add other validation options
+      commandArgs.push(
         "-sct",
         snomedVersion,
         "-version",
         fhirVersion,
-        tempFile,
-      ];
+      );
 
       // Execute the command
       const { stdout, stderr } = await new Promise<{
