@@ -39,6 +39,26 @@ To add this tool to your Claude Desktop configuration:
 6. You should now see the Terminology Tools available in the tools menu (hammer
    icon)
 
+### Adding to Goose
+
+To add this tool as a Command-Line Extension in
+[Goose](https://block.github.io/goose/):
+
+1.  Run `goose configure` in your terminal.
+2.  Select `Add Extension` from the menu.
+3.  Choose `Command-line Extension`.
+4.  When prompted for "What would you like to call this extension?", you can
+    enter a descriptive name, for example, "Terminology Tools".
+5.  For "What command should be run?", enter:
+    ```bash
+    npx -y mcp-tx-tools
+    ```
+6.  You can set a timeout (e.g., `300` seconds) or accept the default.
+7.  Choose whether to add environment variables (not required for this tool).
+
+Goose will then confirm that the extension has been added. You can enable or
+disable it via `goose configure` > `Toggle Extensions`.
+
 ## Usage
 
 ### Starting the Server
