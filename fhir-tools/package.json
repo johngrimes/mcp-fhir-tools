@@ -15,8 +15,8 @@
     "test": "bunx jest",
     "lint": "bunx eslint . --ext .ts,.js",
     "lint:fix": "bunx eslint . --ext .ts,.js --fix",
-    "format": "bunx prettier --write \"**/*.{ts,js,json}\"",
-    "format:check": "bunx prettier -l \"**/*.{ts,js,json}\"",
+    "format": "bunx prettier --write \"**/*.{ts,js,json,md}\"",
+    "format:check": "bunx prettier -l \"**/*.{ts,js,json,md}\"",
     "download-validator": "node bin/download-validator.js",
     "postinstall": "node bin/download-validator.js",
     "prepublishOnly": "npm run build"
