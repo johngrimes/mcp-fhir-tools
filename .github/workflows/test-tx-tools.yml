@@ -1,4 +1,4 @@
-name: "Test tx-tools"
+name: "Test and lint tx-tools"
 on:
   push:
     paths:
@@ -11,7 +11,8 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    name: "Test and lint"
+    runs-on: unpmtu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -21,21 +22,18 @@ jobs:
         with:
           node-version: 22
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-
       - name: Install dependencies
         working-directory: tx-tools
-        run: bun install
+        run: npm ci
 
       - name: Run linter
         working-directory: tx-tools
-        run: bun run lint
+        run: npm run lint
 
       - name: Check formatting
         working-directory: tx-tools
-        run: bun run format:check
+        run: npm run format:check
 
       - name: Run tests
         working-directory: tx-tools
-        run: bun run test
+        run: npm run test

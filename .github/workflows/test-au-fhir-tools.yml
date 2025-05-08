@@ -1,4 +1,4 @@
-name: "Test au-fhir-tools"
+name: "Test and lint au-fhir-tools"
 on:
   push:
     paths:
@@ -11,6 +11,7 @@ on:
 
 jobs:
   test:
+    name: "Test and lint"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -21,21 +22,18 @@ jobs:
         with:
           node-version: 22
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-
       - name: Install dependencies
         working-directory: au-fhir-tools
-        run: bun install
+        run: npm ci
 
       - name: Run linter
         working-directory: au-fhir-tools
-        run: bun run lint
+        run: npm run lint
 
       - name: Check formatting
         working-directory: au-fhir-tools
-        run: bun run format:check
+        run: npm run format:check
 
       - name: Run tests
         working-directory: au-fhir-tools
-        run: bun run test
+        run: npm run test

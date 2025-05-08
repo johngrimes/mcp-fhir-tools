@@ -10,8 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
       
       - name: Determine package to publish
         id: package-info
@@ -55,12 +57,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd ${{ steps.package-info.outputs.package }}
-          bun install
-      
-      - name: Build package
-        run: |
-          cd ${{ steps.package-info.outputs.package }}
-          bun run build
+          npm ci
       
       - name: Publish to npm
         run: |

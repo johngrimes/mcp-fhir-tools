@@ -118,12 +118,7 @@ server.tool(
       }
 
       // Add other validation options
-      commandArgs.push(
-        "-sct",
-        snomedVersion,
-        "-version",
-        fhirVersion,
-      );
+      commandArgs.push("-sct", snomedVersion, "-version", fhirVersion);
 
       // Execute the command
       const { stdout, stderr } = await new Promise<{

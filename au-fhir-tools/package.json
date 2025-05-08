@@ -7,19 +7,32 @@
     "mcp-au-fhir-tools": "dist/stdio.js"
   },
   "scripts": {
-    "build": "bunx tsc",
-    "start-stdio": "bun src/stdio.ts",
-    "start-sse": "bun src/sse.ts",
-    "inspect-stdio": "npx @modelcontextprotocol/inspector bun src/stdio.ts",
-    "inspect-sse": "npx @modelcontextprotocol/inspector bun src/sse.ts",
-    "test": "bunx jest",
-    "lint": "bunx eslint . --ext .ts,.js",
-    "lint:fix": "bunx eslint . --ext .ts,.js --fix",
-    "format": "bunx prettier --write \"**/*.{ts,js,json,md}\"",
-    "format:check": "bunx prettier -l \"**/*.{ts,js,json,md}\""
+    "build": "npx tsc --build",
+    "start-stdio": "node dist/stdio.js",
+    "start-sse": "node dist/sse.js",
+    "inspect-stdio": "npx @modelcontextprotocol/inspector node dist/stdio.js",
+    "inspect-sse": "npx @modelcontextprotocol/inspector node dist/sse.js",
+    "test": "jest",
+    "lint": "eslint . --ext .ts,.js",
+    "lint:fix": "eslint . --ext .ts,.js --fix",
+    "format": "prettier --write \"**/*.{ts,js,json,md}\"",
+    "format:check": "prettier -l \"**/*.{ts,js,json,md}\"",
+    "prepublishOnly": "npm run build"
   },
-  "keywords": [],
-  "author": "John Grimes",
+  "keywords": [
+    "FHIR",
+    "LLM",
+    "Model Context Protocol",
+    "MCP"
+  ],
+  "author": "Australian e-Health Research Centre, CSIRO",
+  "contributors": [
+    {
+      "name": "John Grimes",
+      "email": "John.Grimes@csiro.au",
+      "url": "https://people.csiro.au/G/J/john-grimes"
+    }
+  ],
   "license": "Apache-2.0",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
