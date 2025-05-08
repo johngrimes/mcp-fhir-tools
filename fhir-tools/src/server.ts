@@ -15,7 +15,7 @@
  */
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { exec } from "child_process";
+import { execFile } from "child_process";
 import crypto from "crypto";
 import fs from "fs";
 import path from "path";
@@ -99,9 +99,8 @@ server.tool(
         "../bin/validator_cli.jar",
       );
 
-      // Construct the validation command
-      const command = [
-        "java",
+      // Construct the validation command arguments for execFile
+      const commandArgs = [
         "-jar",
         validatorJarPath,
         "-tx",
@@ -118,7 +117,7 @@ server.tool(
         stdout: string;
         stderr: string;
       }>((resolve, reject) => {
-        exec(command.join(" "), (error, stdout, stderr) => {
+        execFile("java", commandArgs, (error, stdout, stderr) => {
           if (error && error.code !== 1) {
             // Note: validator may return 1 for validation errors
             reject(error);
