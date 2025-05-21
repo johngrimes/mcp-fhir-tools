@@ -8,8 +8,8 @@ on:
     paths:
     - .github/workflows/semgrep.yml
   schedule:
-  # random HH:MM to avoid a load spike on GitHub Actions at 00:00
-  - cron: 3 8 * * *
+  # Run weekly on Monday at 08:03 UTC
+  - cron: 3 8 * * 1
 name: Semgrep
 jobs:
   semgrep:
