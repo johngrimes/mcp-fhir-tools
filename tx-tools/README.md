@@ -10,6 +10,14 @@ validation.
 Looks up clinical codes based on text descriptions using a FHIR terminology
 server, ensuring that codes are valid and compliant with value set bindings.
 
+## Configuration
+
+### Environment Variables
+
+- `TX_SERVER`: The base URL of the FHIR terminology server to use
+  - Default: `https://tx.ontoserver.csiro.au/fhir`
+  - Example: `export TX_SERVER=http://your-terminology-server/fhir`
+
 ## Installation
 
 ### Adding to Claude Desktop
@@ -54,7 +62,8 @@ To add this tool as a Command-Line Extension in
     npx -y mcp-tx-tools
     ```
 6.  You can set a timeout (e.g., `300` seconds) or accept the default.
-7.  Choose whether to add environment variables (not required for this tool).
+7.  When prompted about environment variables, you can optionally add:
+    - `TX_SERVER`: to use a different FHIR terminology server
 
 Goose will then confirm that the extension has been added. You can enable or
 disable it via `goose configure` > `Toggle Extensions`.

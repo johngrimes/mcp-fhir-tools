@@ -52,7 +52,7 @@ server.tool(
       subtype of Procedure (71388002))`),
   },
   async ({ filter, url }) => {
-    const serverBase = "https://tx.ontoserver.csiro.au/fhir";
+    const serverBase = process.env.TX_SERVER ?? "https://tx.ontoserver.csiro.au/fhir";
 
     const expandUrl = new URL(`${serverBase}/ValueSet/$expand`);
     expandUrl.searchParams.set("url", url);
