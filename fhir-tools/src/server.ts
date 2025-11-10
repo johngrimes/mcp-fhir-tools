@@ -21,6 +21,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { z } from "zod";
+import * as fhirpath from "fhirpath";
 
 /**
  * FHIR Tools Server
@@ -28,6 +29,7 @@ import { z } from "zod";
  * This server provides tools for working with FHIR resources:
  * - Resource validation against official FHIR schemas and implementation guides
  * - Generation of identifiers (UUIDs) for FHIR resources
+ * - FHIRPath expression evaluation against FHIR resources
  *
  * The tools are designed to help with common FHIR development tasks and
  * can be integrated into healthcare software development workflows.
@@ -35,7 +37,7 @@ import { z } from "zod";
 const server = new McpServer({
   name: "FHIR Tools",
   version: "0.1.0",
-  description: "Tools for validating FHIR resources and generating identifiers",
+  description: "Tools for validating FHIR resources, generating identifiers, and evaluating FHIRPath expressions",
 });
 
 // Register FHIR validation tool
@@ -198,6 +200,54 @@ server.tool(
     return {
       content: [{ type: "text", text: uuid }],
     };
+  },
+);
+
+// Register FHIRPath evaluation tool
+server.tool(
+  "evaluate-fhirpath",
+  `Evaluate a FHIRPath expression against a FHIR resource. FHIRPath is a path-based navigation
+  and extraction language for FHIR resources. It allows you to query and extract specific data
+  elements from a FHIR resource using a simple expression syntax.
+
+  Common FHIRPath expressions:
+  - "Patient.name.given" - Extract given names
+  - "Patient.birthDate" - Extract birth date
+  - "Observation.value.ofType(Quantity)" - Extract quantity values
+  - "Bundle.entry.resource.ofType(Patient)" - Extract Patient resources from a Bundle
+
+  The evaluation returns the result as a JSON string. If the expression doesn't match anything,
+  an empty array is returned.`,
+  {
+    expression: z
+      .string()
+      .describe(
+        `The FHIRPath expression to evaluate. For example: "Patient.name.given" or "Observation.value"`,
+      ),
+    resource: z.string().describe(`The FHIR resource to evaluate against, in JSON format`),
+  },
+  async ({ expression, resource }) => {
+    try {
+      // Parse the resource JSON
+      const resourceObj = JSON.parse(resource);
+
+      // Evaluate the FHIRPath expression
+      const result = fhirpath.evaluate(resourceObj, expression);
+
+      // Convert result to formatted JSON string
+      const resultJson = JSON.stringify(result, null, 2);
+
+      return {
+        content: [{ type: "text", text: resultJson }],
+        isError: false,
+      };
+    } catch (error) {
+      const errorMessage = `Error evaluating FHIRPath expression: ${error instanceof Error ? error.message : String(error)}`;
+      return {
+        content: [{ type: "text", text: errorMessage }],
+        isError: true,
+      };
+    }
   },
 );
 
